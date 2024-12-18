@@ -4,6 +4,16 @@ local cjson = require "cjson.safe"
 local _M = {}
 
 function _M.execute(conf)
+    local path = kong.request.get_path()
+    kong.log.debug("Request path: ", path)
+
+    for _, ignored_path in ipairs(conf.ignored_paths or {}) do
+        if path == ignored_path then
+            kong.log.debug("Ignoring kong-auth-request for path: ", path)
+            return  -- Ignora a execução do plugin
+        end
+    end
+
     local ok, err
     local scheme, host, port, _ = unpack(http:parse_uri(conf.auth_uri))
 

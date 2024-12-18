@@ -1,4 +1,7 @@
 # kong-auth-request
+
+Tested in Kong 3.8
+
 A Kong plugin that make GET auth request before proxying the original request.
 
 ## Description
@@ -35,6 +38,7 @@ config parameter | description
 config.auth_uri  | Plugin make a HTTP GET request with Authorization header to this URL before proxying the original request
 config.auth_response_headers_to_forward | If auth request was successful then plugin takes header names from auth_response_headers_to_forward collection, then finds them in auth response headers and adds them into origin request before proxying it to upstream.
 config.origin_request_headers_to_forward_to_auth | Origin request headers to pass to auth uri
+config.ignored_paths | Paths to ignore the authorization 
 ## Author
 
 Andray Shotkin
